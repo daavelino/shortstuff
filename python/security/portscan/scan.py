@@ -29,7 +29,7 @@ def main():
               file=sys.stderr)
         sys.exit(-1)
 
-    #### Special ports to test:
+    #### Special ports to test. Feel free to change it as you please:
     ports = [21, 22, 23, 80, 110, 115, 123, 161, 389, 443, 445, 465, \
              993, 1241, 1433, 1521, 3306, 3389, 5432, 9418]  
     
