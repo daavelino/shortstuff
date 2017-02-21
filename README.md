@@ -1,1 +1,2 @@
-#shortstuff is a personal repository for short code to use daily.
+#shortstuff:
+a personal repository for short codes used daily.
