@@ -1,5 +1,4 @@
 from crond import crond
-import functions
 
 def main():
 
