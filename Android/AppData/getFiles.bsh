@@ -1,0 +1,48 @@
+#!/bin/bash
+
+#
+# Simple script to get Android's APP data for further inspection.
+#
+
+
+
+#### Check input:
+if [[ ! $1 ]]; then
+  echo "Usage: $0 <package name (obtained via listApps.bsh)>"
+  exit
+fi
+
+DATE=$(date +'%d-%m-%Y-%H.%M.%S')
+TARGET=$1
+
+#### Check directory structure:
+if [[ ! -d $TARGET.$DATE ]]; then
+  mkdir $TARGET.$DATE
+  cd $TARGET.$DATE
+else
+  echo "Directory $TARGET.$DATE exists. Exiting."
+  exit
+fi
+
+#### Checking adb presence and get data properly:
+if [[ ! $(type -p adb) ]]; then
+  source ../conf/settings.conf 
+  #### Getting files with adb:
+  PATH=$PATH:$ADB_PATH adb backup -f $TARGET.ab $TARGET
+else
+  #### Getting files with adb:
+  adb backup -f $TARGET.ab $TARGET
+fi
+
+#### Converting adb backup file properly:
+dd if=$TARGET.ab of=$TARGET.tar.gz bs=24 skip=1
+
+cat $TARGET.tar.gz | \
+python -c "import zlib,sys;sys.stdout.write(zlib.decompress(sys.stdin.read()))" > $TARGET.tar
+
+tar -xvf $TARGET.tar
+
+#### Cleaning the mess:
+rm $TARGET.tar $TARGET.tar.gz
+
+exit

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#
+# Simple script to put Android's APP data obtained from ./geAppData into
+# the right place.
+#
+
+
+if [[ ! $1 ]]; then
+  echo "Usage: $0 <backup directory (obtained via getAppData.bsh)>"
+  exit
+fi
+
+TARGET=$1
+
+#### Converting adb restore file properly:
+tar -cvf $TARGET.tar $TARGET
+dd if=$TARGET.tar of=$TARGET.tmp bs=24 count=1
+
+cat $TARGET.tmp | \
+python -c "import zlib,sys;sys.stdout.write(zlib.compress(sys.stdin.read()))" > $TARGET.ab
+
+#### Cleaning the mess:
+rm $TARGET.tar $TARGET.tmp
+
+#### Checking adb presence and put data properly:
+if [[ ! $(type -p adb) ]]; then
+  source ../conf/settings.conf
+  PATH=$PATH:$ADB_PATH adb restore $TARGET.ab
+else
+  adb restore $TARGET.ab
+fi
+
+exit
