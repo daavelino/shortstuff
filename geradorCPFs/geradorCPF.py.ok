@@ -1,0 +1,65 @@
+import sys
+
+
+
+def firstDigit(seed):
+    ''' The returned quotient is the first CPF digit.'''
+    position = 10
+    tmp = 0
+    for i in seed:
+        tmp = tmp + (position * int(i))
+        position = position - 1
+
+    digit = int(tmp / 11)
+    remainder = tmp % 11
+
+#    print(digit, remainder)
+
+    if remainder < 2:
+        return(0)
+    else:
+        return(11 - remainder)
+
+
+
+def secondDigit(seed, firstDigit):
+    ''' Returns the CPF second digit.'''
+    position = 11
+    tmp = 0
+    seed = str(seed) + str(firstDigit)
+
+    for i in seed:
+        tmp = tmp + (position * int(i))
+        position = position - 1
+
+    digit = int(tmp / 11)
+    remainder = tmp % 11
+
+    if remainder < 2:
+        return(0)
+    else:
+        return(11 - remainder)
+
+
+
+def main():
+    seed = sys.argv[1]
+    if len(seed) != 9:
+        print('Usage:', sys.argv[0], '<9 digits to generate CPF.')
+        sys.exit(1)
+    
+    tmp1 = firstDigit(seed)
+    tmp2 = secondDigit(seed, tmp1)
+
+    cpf = seed[0] + seed[1] + seed[2] + '.' + \
+          seed[3] + seed[4] + seed[5] + '.' + \
+          seed[6] + seed[7] + seed[8] + '-' + \
+          str(tmp1) + str(tmp2)
+          
+    print(str(seed) + str(tmp1) + str(tmp2))
+    print(cpf)
+
+    return(0)
+
+if __name__=='__main__':
+    main()
