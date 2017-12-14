@@ -47,6 +47,7 @@ $ ./listApps.bsh
 will produces a list with all installed apps. Choose one of them, for instance, 
 
 com.android.contacts and 
+
 2. use getAppData to get data from device:
 
 ```sh
@@ -63,7 +64,7 @@ it will create the directory com.android.contacts.DD-MM-YYYY-hh.mm.ss. Go and ex
 $ cd com.android.contacts.DD-MM-YYYY-hh.mm.ss/
 ```
 
-if you change something and need to put modified data back to the application, just do:
+3. if you change something and need to put modified data back to the application, just do:
 
 ```sh
 $ ./putAppData.bsh <directory containing data>
