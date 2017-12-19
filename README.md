@@ -1,2 +1,8 @@
 #shortstuff:
-a personal repository for short codes used daily.
+for short codes used daily.
+
+- Android/
+-- AppData/
+- geradorCPFs/
+- python-crond/
+- security/

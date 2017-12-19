@@ -1,7 +1,6 @@
 import sys
 
 
-
 def firstDigit(seed):
     ''' The returned quotient is the first CPF digit.'''
     position = 10
