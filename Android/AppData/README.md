@@ -8,7 +8,7 @@ AppData is a serie of 3 bash scripts that uses Android Debugger Bridge (adb) to:
 
 # What's the point?
 
-In some point of Android's application security tests it is important to check if sensitive information are stored at application data directories. You may also want to check the effects in application's behavior if some data be inserted arbitrarly. To perform such test you can:
+At some point of Android's application security tests it is important to check if sensitive information are stored at application data directories. You may also want to check the effects in application's behavior if some data be inserted arbitrarly. To perform such test you can:
 
 1. list all applications present in the device
 2. extract data from the desired application
